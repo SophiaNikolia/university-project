@@ -1,0 +1,125 @@
+﻿<div class="row">
+    @*left part*@
+    <div class="col-2 ms-5 mt-3" style="outline: 2px solid black">
+        <h2 class="mt-2">UniApp</h2>
+        <ul class="nav flex-column bg-white mb-0 ">
+            <li class="nav-item mt-3 mb-3">
+                <a href="#" class=" p-0 nav-link text-dark font-italic bg-light">
+                    <i class="fa-solid fa-border-all"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-3">
+                <a href="#" class="p-0 nav-link text-dark font-italic bg-light">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Grades
+                </a>
+            </li>
+            <li class="nav-item mb-3">
+                <a href="#" class=" p-0 nav-link text-dark font-italic bg-light">
+                    <i class="fa-solid fa-chart-line"></i> 
+                    Graphs
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    @*right part*@
+    <div class="col-9 mt-3 row gy-5">
+
+        @*upper body*@
+        <div class="row">
+
+            @*search*@
+            <div class="col-8">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+            @*user's profil*@
+            <div class="col-3">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Name
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        @*My courses*@
+        <div class="" style="outline: 2px solid black">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Subject Name</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Lecturer</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Lecturer's Name</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="">Next</span>
+                    </button>
+            </div>
+
+        </div>
+
+        @*lowest part*@
+        <div>
+            <div class="row">
+                @*gpa card*@
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fa-solid fa-gauge-high"></i> GPA</h5>
+                            <span class="fs-1">No.</span>
+                        </div>
+                    </div>
+            
+                </div>
+                @*passed courses card*@
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fa-solid fa-book"></i> Completed Courses</h5>
+                            <span class="fs-1">No.</span>
+                        </div>
+                    </div>
+                </div>
+                @*ects card*@
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fa-solid fa-chart-simple"></i> ECTs</h5>
+                            <span class="fs-1">No.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
