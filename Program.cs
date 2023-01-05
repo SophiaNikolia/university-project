@@ -2,13 +2,27 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using university_project.Areas.Identity.Data;
 using university_project.Data;
+using university_project.Models;
+
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("identityContextConnection") ?? throw new InvalidOperationException("Connection string 'identityContextConnection' not found.");
+
+var universityConnectionString = builder.Configuration.GetConnectionString("universityContextConnection") ?? throw new InvalidOperationException("Connection string 'universityContextConnection' not found.");
+var identityConnectionString = builder.Configuration.GetConnectionString("identityContextConnection") ?? throw new InvalidOperationException("Connection string 'identityContextConnection' not found.");
+
+builder.Services.AddDbContext<universityContext>(options =>
+    options.UseSqlite(universityConnectionString));
 
 builder.Services.AddDbContext<identityContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseSqlite(identityConnectionString));
 
-builder.Services.AddDefaultIdentity<EntityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<EntityUser>(options => {
+    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    })
     .AddEntityFrameworkStores<identityContext>();
 
 // Add services to the container.
