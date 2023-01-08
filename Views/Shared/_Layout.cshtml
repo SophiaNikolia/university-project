@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/university_project.styles.css" asp-append-version="true" />
 
 </head>
-<body>
+<body class="d-flex flex-column vh-100">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -31,8 +31,8 @@
             </div>
         </nav>
     </header>
-    <div>
-        <main role="main" class="pb-3">
+    <div class="flex-grow-1">
+        <main role="main" class="pb-3 h-100-percent">
             @RenderBody()
         </main>
     </div>
