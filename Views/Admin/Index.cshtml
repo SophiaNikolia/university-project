@@ -1,0 +1,46 @@
+﻿@model IEnumerable<university_project.Models.User>
+
+@using Microsoft.AspNetCore.Identity
+@using university_project.Areas.Identity.Data
+
+@inject SignInManager<EntityUser> SignInManager
+@inject UserManager<EntityUser> UserManager
+
+<div class="container">
+    <h2>
+        Hello @UserManager.GetUserName(User)
+    </h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-username="@item.Username">Details</a> |
+                    <a asp-action="Delete" asp-route-username="@item.Username">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <p class="mt-5">
+        <a asp-action="Create">Create New</a>
+    </p>
+</div>
+

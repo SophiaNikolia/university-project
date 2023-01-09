@@ -15,7 +15,7 @@ builder.Services.AddDbContext<universityContext>(options =>
 builder.Services.AddDbContext<identityContext>(options =>
     options.UseSqlite(identityConnectionString));
 
-builder.Services.AddDefaultIdentity<EntityUser>(options => {
+builder.Services.AddIdentity<EntityUser, IdentityRole>(options => {
     options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;
     options.Password.RequireLowercase = true;
