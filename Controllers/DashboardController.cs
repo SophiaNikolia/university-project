@@ -8,5 +8,10 @@ namespace university_project.Controllers
         {
             return View();
         }
+
+        public IActionResult Professor()
+        {
+            return View();
+        }
     }
 }
