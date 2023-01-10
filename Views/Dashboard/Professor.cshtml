@@ -1,0 +1,152 @@
+﻿<div class="container">
+    <div class="row">
+        @*left part*@
+        <div class="col-2 ms-5 mt-3 rounded outline" style="">
+            <h2 class="mt-2">UniApp</h2>
+            <ul class="nav flex-column bg-white mb-0 ">
+                <li class="nav-item mt-3 mb-3">
+                    <a href="#" class="butn p-0 nav-link text-dark font-italic fs-4">
+                        <i class="fa-solid fa-border-all"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a href="#" class="p-0 nav-link text-dark font-italic butn fs-4">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        Grades
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a href="#" class=" p-0 nav-link text-dark font-italic butn fs-4">
+                        <i class="fa-solid fa-chart-line"></i> 
+                        Graphs
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        @*right part*@
+        <div class="col-9 mt-3 row gy-5 ms-5">
+
+            @*upper body*@
+            <div class="row">
+
+                @*search*@
+                <div class="col-8">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2 outline" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+                @*user's profil*@
+                <div class="col-4">
+
+                    <div class="row fs-4">
+
+
+
+                        <div class="dropdown d-flex justify-content-end hovered">
+                            <img src = "https://th.bing.com/th/id/R.9d32bec8058bd3595a63a08a8cc12ade?rik=9cCTin36GLU%2f5w&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_87237.png&ehk=hVpH%2bC7rwlA1j2KqxGpMs1sp9l0RgM0jjRJsJsvDoPc%3d&risl=&pid=ImgRaw&r=0" class="rounded-circle h-auto me-2" style="width:12%">
+
+                            <a class="dropdown-toggle blacktxt prf" data-bs-toggle="dropdown" aria-expanded="false">
+                                Name
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                            </ul>
+                        </div>
+                
+
+                    </div>
+                </div>
+
+            </div>
+
+            @*My courses*@
+            <div class="bg rounded" style="">
+
+                <div class="row p-5">
+                
+                    <div class="row">
+                        <div class="col-12 col-lg-10">
+                           <h4 class="whitetxt"><i class="fa-solid fa-person-chalkboard"></i> My Courses</h4>
+                        </div>
+
+                        <div class="col col-lg-2 text-right">
+                            <a class="btn btn-color mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <i class="fa-solid fa-chevron-left whitetxt"></i>
+                            </a>
+                            <a class="btn btn-color mb-3 " href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <i class="fa-solid fa-chevron-right whitetxt"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                
+
+                    <div id="carouselExampleIndicators" class=" gy-4 carousel slide" data-bs-ride="true">
+                        @*<div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>*@
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="card cards-color" style="width: 18rem;">
+                                    <div class="card-body hovered whitetxt">
+                                        <h5 class="card-title">Subject Name</h5>
+                                        <h6 class="card-subtitle mb-2 ">Total hours:</h6>
+                                        <h6 class="card-subtitle mb-2 ">No.</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+            @*lowest part*@
+            <div>
+                <div class="row">
+                    @*gpa card*@
+                    <div class="col">
+                        <div class="card outline text-center hovered" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa-solid fa-clock"></i> Hours</h5>
+                                <span class="fs-1">No.</span>
+                            </div>
+                        </div>
+            
+                    </div>
+                    @*passed courses card*@
+                    <div class="col">
+                        <div class="card outline text-center hovered" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa-solid fa-book"></i> Courses</h5>
+                                <span class="fs-1">No.</span>
+                            </div>
+                        </div>
+                    </div>
+                    @*ects card*@
+                    <div class="col">
+                        <div class="card outline text-center hovered" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa-solid fa-graduation-cap"></i> Students</h5>
+                                <span class="fs-1">No.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
