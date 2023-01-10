@@ -1,0 +1,41 @@
+﻿.bg{
+    background-color: darkslategrey;
+}
+
+.outline {
+    outline: 2px solid darkslategrey;
+}
+
+.search-btn {
+    outline: 2px solid darkslategrey;
+    
+}
+
+    .search-btn:hover {
+        background-color: #5b8080;
+    }
+
+    .whitetxt {
+        color: white;
+    }
+
+.blacktxt {
+    color: black;
+}
+
+.img-circl{
+    
+}
+
+.cards-color {
+    background-color: #5b8080/* #436b6b*/;
+}
+
+.butn:hover {
+    background-color: #5b8080;
+    border-radius: 0.2em;
+}
+
+.prf {
+    text-decoration: none;
+}
