@@ -13,5 +13,10 @@ namespace university_project.Controllers
         {
             return View();
         }
+
+        public IActionResult Secretary()
+        {
+            return View();
+        }
     }
 }
