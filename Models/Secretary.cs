@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace university_project.Models
 {
-    public partial class Secretaty
+    public partial class Secretary
     {
         public long Phonenumber { get; set; }
         public string Name { get; set; } = null!;

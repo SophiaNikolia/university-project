@@ -20,7 +20,7 @@ namespace university_project.Models
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<CourseHasStudent> CourseHasStudents { get; set; } = null!;
         public virtual DbSet<Professor> Professors { get; set; } = null!;
-        public virtual DbSet<Secretaty> Secretaties { get; set; } = null!;
+        public virtual DbSet<Secretary> Secretaties { get; set; } = null!;
         public virtual DbSet<Student> Students { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
@@ -96,7 +96,7 @@ namespace university_project.Models
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<Secretaty>(entity =>
+            modelBuilder.Entity<Secretary>(entity =>
             {
                 entity.HasKey(e => e.Phonenumber);
 
