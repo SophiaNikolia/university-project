@@ -1,0 +1,33 @@
+<div>
+    <div class="d-flex flex-column gap-3">
+        @* Account Settings *@
+        <div>
+            <p class="fs-4">Account</p>
+            <div class="d-flex flex-column hover-gray hovered">
+                <a href="@Url.Action("Email", "Settings")" class="d-flex align-items-center gap-2 p-1 fs-5 text-decoration-none text-reset">
+                    <i class="fa-solid fa-envelope"></i>Email
+                </a>
+                <a href="@Url.Action("Password", "Settings")" class="d-flex align-items-center gap-2 p-1 fs-5 text-decoration-none text-reset">
+                    <i class="fa-solid fa-lock"></i>Password
+                </a>
+                <a href="@Url.Action("Personal", "Settings")" class="d-flex align-items-center gap-2 p-1 fs-5 text-decoration-none text-reset">
+                    <i class="fa-solid fa-database"></i>Personal data
+                </a>
+            </div>
+
+        </div>
+
+        @* Appearance Settings *@
+        <div>
+            <p class="fs-4">Appearance</p>
+            <div class="d-flex flex-column hover-gray hovered">
+                <a href="@Url.Action("Theme", "Settings")" class="d-flex align-items-center gap-2 p-1 fs-5 text-decoration-none text-reset">
+                    <i class="fa-solid fa-palette"></i></i>Theme
+                </a>
+                <a href="@Url.Action("Dashboard", "Settings")" class="d-flex align-items-center gap-2 p-1 fs-5 text-decoration-none text-reset">
+                    <i class="fa-solid fa-border-all"></i></i>Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

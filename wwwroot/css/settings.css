@@ -1,0 +1,12 @@
+.hover-gray {
+    background-color: transparent;
+}
+
+.hover-gray :hover{
+    background-color: rgb(230, 230, 230);
+    transition-property: background-color;
+    transition-duration: .25s;
+    transition-timing-function: ease-in;
+    border-radius: .5em;
+
+}
