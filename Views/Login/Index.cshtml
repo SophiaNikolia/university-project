@@ -8,28 +8,22 @@
 
         <div asp-validation-summary="ModelOnly" class="login-error text-danger"></div>
 
-        <input asp-for="@Model.Email" type="email" autocomplete="email" class="form-control">
-
+        <label class="form-label">Username</label>
+        <input asp-for="@Model.Email" type="text" class="form-control">
         <div class="error-message text-danger">
             <span asp-validation-for="@Model.Email"></span>
         </div>
-
-        <input asp-for="@Model.Password" id="passwordInput" type="password" class="form-control border-end-0" />
-
-        <div class="error-message text-danger">
-            <span asp-validation-for="@Model.Password"></span>
-        </div>
-
-        <label class="form-label">Username</label>
-        <input type="text" class="form-control">
         
         <label class="form-label mt-3">Password</label>
         <div class="input-group">
-            <input id="passwordInput" type="password" class="form-control border-end-0" />
+            <input asp-for="@Model.Password" id="passwordInput" type="password" class="form-control border-end-0" />
+            <div class="error-message text-danger">
+                <span asp-validation-for="@Model.Password"></span>
+            </div>
             <span id="eyeSlashIcon" class="input-group-text bg-transparent rounded-end hovered"><i class="fa-solid fa-eye-slash"></i></span>
             <span id="eyeIcon" class="visually-hidden input-group-text bg-transparent hovered"><i class="fa-solid fa-eye"></i></span>
         </div>
-        <button type="button" class="btn btn-primary mt-5">Sign In</button>
+        <button type="submit" class="btn btn-primary mt-5">Sign In</button>
         <a href="#" class="link-primary text-decoration-none mt-4">Forgot your password?</a>
     </form>
 </div>
