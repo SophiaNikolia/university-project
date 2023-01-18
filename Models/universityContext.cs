@@ -54,7 +54,7 @@ namespace university_project.Models
                 entity.HasOne(d => d.ProfessorsAfmNavigation)
                     .WithMany(p => p.Courses)
                     .HasForeignKey(d => d.ProfessorsAfm)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<CourseHasStudent>(entity =>
@@ -70,12 +70,12 @@ namespace university_project.Models
                 entity.HasOne(d => d.CourseIdCourseNavigation)
                     .WithMany(p => p.CourseHasStudents)
                     .HasForeignKey(d => d.CourseIdCourse)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.StudentsRegistrationNumberNavigation)
                     .WithMany(p => p.CourseHasStudents)
                     .HasForeignKey(d => d.StudentsRegistrationNumber)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Professor>(entity =>
@@ -93,7 +93,7 @@ namespace university_project.Models
                 entity.HasOne(d => d.UsersUsernameNavigation)
                     .WithMany(p => p.Professors)
                     .HasForeignKey(d => d.UsersUsername)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Secretary>(entity =>
@@ -109,7 +109,7 @@ namespace university_project.Models
                 entity.HasOne(d => d.UsersUsernameNavigation)
                     .WithMany(p => p.Secretaties)
                     .HasForeignKey(d => d.UsersUsername)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Student>(entity =>
@@ -125,7 +125,7 @@ namespace university_project.Models
                 entity.HasOne(d => d.UsersUsernameNavigation)
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.UsersUsername)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<User>(entity =>
