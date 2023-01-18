@@ -5,7 +5,7 @@ namespace university_project.Models
     public class Login
     {
         [Required(ErrorMessage = "Please enter your email address!")]
-        [EmailAddress]
+        //[EmailAddress]
         public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = "Please enter your password!")]
