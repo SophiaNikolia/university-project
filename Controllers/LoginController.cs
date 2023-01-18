@@ -46,14 +46,17 @@ namespace university_project.Controllers
                     return View();
                 }
 
-                var role = await _signInManager.UserManager.GetRolesAsync(usr);
+                var roles = await _signInManager.UserManager.GetRolesAsync(usr);
 
-                var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, isPersistent: false, lockoutOnFailure: false);
+                // The first entry is the user's role
+                var userRole = roles[0];
+
+                var result = await _signInManager.PasswordSignInAsync(usr.UserName, login.Password, isPersistent: false, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToAction("Student", "Dashboard");
+                    return RedirectToAction(userRole, "Dashboard");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
