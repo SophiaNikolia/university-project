@@ -1,4 +1,4 @@
-﻿@model university_project.Models.User
+﻿@model university_project.Models.NewUser
 
 @{
     ViewData["Title"] = "Create";
@@ -16,23 +16,24 @@
             <form asp-action="Create" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Username" class="control-label"></label>
-                    <input asp-for="Username" class="form-control" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
+                    <label asp-for="User.Username" class="control-label"></label>
+                    <input asp-for="User.Username" class="form-control" />
+                    <span asp-validation-for="User.Username" class="text-danger"></span>
                 </div>
                 <div class="form-group mt-2">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <label asp-for="User.Password" class="control-label"></label>
+                    <input asp-for="User.Password" class="form-control" />
+                    <span asp-validation-for="User.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group mt-2">
-                    <label asp-for="Role" class="control-label"></label>
-                    <input asp-for="Role" class="form-control" />
-                    <span asp-validation-for="Role" class="text-danger"></span>
+                    <label asp-for="User.Role" class="control-label">Role</label>
+                    <select asp-for="User.Role" asp-items="Model.SelectRole" class="form-select" aria-label="-"></select>
+                    <span asp-validation-for="User.Role" class="text-danger"></span>
                 </div>
-                <div class="form-group d-flex mt-3">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                    <div class="align-self-center ms-2">
+                <div class="form-group d-flex mt-3 gap-3">
+
+                    <button type="submit" class="btn btn-primary">Next</button>
+                    <div class="align-self-center">
                         <a asp-action="Index">Back to List</a>
                     </div>
                 </div>
@@ -42,7 +43,6 @@
     </div>
 
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -8,6 +8,7 @@ using university_project.Models;
 
 namespace university_project.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly SignInManager<EntityUser> _signInManager;
@@ -32,12 +33,14 @@ namespace university_project.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(Admin admin)
         {
@@ -69,38 +72,44 @@ namespace university_project.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return View(new NewUser());
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Username,Password,Role")] User user)
+        public async Task<IActionResult> Create(NewUser model)
         {
+            ModelState.Remove("Professor");
+            ModelState.Remove("Secretary");
+
+            string validationErrors = string.Join(",",
+                                ModelState.Values.Where(E => E.Errors.Count > 0)
+                                .SelectMany(E => E.Errors)
+                                .Select(E => E.ErrorMessage)
+                                .ToArray());
+
             if (ModelState.IsValid)
             {
 
-                EntityUser identityUser = CreateUser();
+                EntityUser identityUser = this.CreateUser();
 
                 string email = string.Empty;
 
-                email = CustomEmail(user.Username, user.Role);
+                email = CustomEmail(model.User.Username, model.User.Role);
 
-                await _userStore.SetUserNameAsync(identityUser, user.Username, CancellationToken.None);
+                await _userStore.SetUserNameAsync(identityUser, model.User.Username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(identityUser, email, CancellationToken.None);
 
-                var result = await _userManager.CreateAsync(identityUser, user.Password);
+                var result = await _userManager.CreateAsync(identityUser, model.User.Password);
 
                 if (!result.Succeeded)
                 {
@@ -108,21 +117,99 @@ namespace university_project.Controllers
                 }
 
                 // Add the user to the equivalent identity role
-                await _userManager.AddToRoleAsync(identityUser, user.Role);
+                await _userManager.AddToRoleAsync(identityUser, model.User.Role);
 
                 // save the hashed password instead of the real one
                 // in the university.db
-                user.Password = identityUser.PasswordHash;
+                model.User.Password = identityUser.PasswordHash;
 
-                await _context.AddAsync(user);
+                // add the user to the Users table
+                await _context.Users.AddAsync(model.User);
+
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                // save the username of the newly created user
+                TempData["username"] = model.User.Username;
+
+                // redirect to the action based on the user's role
+                return RedirectToAction(model.User.Role);
             }
-            return View(user);
+
+            return View(new NewUser());
         }
 
-        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("/admin/create/secretary")]
+        public IActionResult Secretary()
+        {
+            return View(new NewUser());
+        }
+
+        [HttpPost]
+        [Route("/admin/create/secretary")]
+        public async Task<IActionResult> Secretary(NewUser model)
+        {
+            ModelState.Remove("Professor");
+            ModelState.Remove("User");
+            ModelState.Remove("Secretary.UsersUsernameNavigation");
+            ModelState.Remove("Secretary.UsersUsername");
+
+            string validationErrors = string.Join(",",
+                                ModelState.Values.Where(E => E.Errors.Count > 0)
+                                .SelectMany(E => E.Errors)
+                                .Select(E => E.ErrorMessage)
+                                .ToArray());
+
+            string username = TempData["username"].ToString();
+
+            if (ModelState.IsValid)
+            {
+                var user = await _context.Users.FindAsync(username);
+
+                model.Secretary.UsersUsername = user.Username;
+                
+                await _context.Secretaties.AddAsync(model.Secretary);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Admin");
+            }
+
+            return View(new NewUser());
+        }
+
+        [HttpGet]
+        [Route("/admin/create/professor")]
+        public IActionResult Professor()
+        {
+            return View(new NewUser());
+        }
+
+        [HttpPost]
+        [Route("/admin/create/professor")]
+        public async Task<IActionResult> Professor(NewUser model)
+        {
+            ModelState.Remove("UsersUsernameNavigation");
+            ModelState.Remove("UsersUsername");
+
+            string username = TempData["username"].ToString();
+
+            if (ModelState.IsValid)
+            {
+                var user = await _context.Users.FindAsync(username);
+
+                model.Professor.UsersUsername = user.Username;
+                
+                await _context.Professors.AddAsync(model.Professor);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Admin");
+            }
+
+            return View(new NewUser());
+        }
+
         [HttpGet]
         public async Task<IActionResult> Details(string? username)
         {
@@ -141,7 +228,6 @@ namespace university_project.Controllers
             return View(user);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(string? username)
         {
@@ -152,6 +238,7 @@ namespace university_project.Controllers
 
             var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Username.Equals(username));
+
             if (user == null)
             {
                 return NotFound();
@@ -160,7 +247,6 @@ namespace university_project.Controllers
             return View(user);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string? username)
