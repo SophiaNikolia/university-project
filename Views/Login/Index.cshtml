@@ -17,11 +17,11 @@
         <label class="form-label mt-3">Password</label>
         <div class="input-group">
             <input asp-for="@Model.Password" id="passwordInput" type="password" class="form-control border-end-0" />
-            <div class="error-message text-danger">
-                <span asp-validation-for="@Model.Password"></span>
-            </div>
             <span id="eyeSlashIcon" class="input-group-text bg-transparent rounded-end hovered"><i class="fa-solid fa-eye-slash"></i></span>
             <span id="eyeIcon" class="visually-hidden input-group-text bg-transparent hovered"><i class="fa-solid fa-eye"></i></span>
+        </div>
+        <div class="error-message text-danger">
+            <span asp-validation-for="@Model.Password"></span>
         </div>
         <button type="submit" class="btn btn-primary mt-5">Sign In</button>
         <a href="#" class="link-primary text-decoration-none mt-4">Forgot your password?</a>
