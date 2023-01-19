@@ -118,7 +118,7 @@ namespace university_project.Models
 
                 entity.ToTable("students");
 
-                entity.Property(e => e.RegistrationNumber).ValueGeneratedNever();
+                entity.Property(e => e.RegistrationNumber).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.UsersUsername).HasColumnName("USERS_username");
 

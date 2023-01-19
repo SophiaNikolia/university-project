@@ -5,7 +5,7 @@
 @inject UserManager<EntityUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <li class="nav-item">
         <form method="post" id="logoutForm" class="form-inline" asp-controller="Logout" asp-action="onPost">
