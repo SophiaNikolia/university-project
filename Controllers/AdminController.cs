@@ -299,12 +299,9 @@ namespace university_project.Controllers
                 case "Secretary":
                     email = username + "@sec.unipi.gr";
                     break;
-                case "Professor":
+                default:
                     email = username + "@unipi.gr";
                     break;
-                default:
-                    System.Diagnostics.Debug.WriteLine("Not known Role");
-                    return email;
             }
 
             return email;
