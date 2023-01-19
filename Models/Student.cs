@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace university_project.Models
 {
@@ -11,9 +12,9 @@ namespace university_project.Models
         }
 
         public long RegistrationNumber { get; set; }
-        public long Name { get; set; }
-        public long Surname { get; set; }
-        public long Department { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Department { get; set; }
         public string UsersUsername { get; set; } = null!;
 
         public virtual User UsersUsernameNavigation { get; set; } = null!;
