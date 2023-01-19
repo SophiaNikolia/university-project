@@ -1,0 +1,60 @@
+@model university_project.Models.NewUser
+
+@{
+    ViewData["Title"] = "Add Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Add</h1>
+
+    <h4>Student</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Secretary" asp-action="AddStudent" method="post" class="d-flex flex-column gap-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="User.Username" class="control-label"></label>
+                    <input asp-for="User.Username" class="form-control" />
+                    <span asp-validation-for="User.Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="User.Role" class="control-label">Role</label>
+                    <select asp-for="User.Role" asp-items="Model.SelectRole" class="form-select" aria-label="-" disabled>
+                        <option value="Student" selected>Student</option>
+                    </select>
+                    <span asp-validation-for="User.Role" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Student.Name" class="control-label"></label>
+                    <input asp-for="Student.Name" class="form-control" />
+                    <span asp-validation-for="Student.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.Surname" class="control-label"></label>
+                    <input asp-for="Student.Surname" class="form-control" />
+                    <span asp-validation-for="Student.Surname" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="Student.Department" class="control-label"></label>
+                    <select asp-for="Student.Department" asp-items="Model.SelectDepartment" class="form-select" aria-label="-"></select>
+                    <span asp-validation-for="Student.Department" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex mt-3 gap-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="align-self-center">
+                        <a asp-controller="Dashboard" asp-action="Secretary">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
