@@ -90,12 +90,8 @@ namespace university_project.Controllers
         {
             ModelState.Remove("Professor");
             ModelState.Remove("Secretary");
-
-            string validationErrors = string.Join(",",
-                                ModelState.Values.Where(E => E.Errors.Count > 0)
-                                .SelectMany(E => E.Errors)
-                                .Select(E => E.ErrorMessage)
-                                .ToArray());
+            ModelState.Remove("Student");
+            ModelState.Remove("Course");
 
             if (ModelState.IsValid)
             {
