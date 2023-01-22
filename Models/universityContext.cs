@@ -46,7 +46,7 @@ namespace university_project.Models
                 entity.ToTable("course");
 
                 entity.Property(e => e.IdCourse)
-                    .ValueGeneratedNever()
+                    .ValueGeneratedOnAdd()
                     .HasColumnName("idCOURSE");
 
                 entity.Property(e => e.ProfessorsAfm).HasColumnName("PROFESSORS_AFM");

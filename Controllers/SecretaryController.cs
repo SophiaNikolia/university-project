@@ -2,7 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using university_project.Areas.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 using university_project.Models;
+using university_project.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace university_project.Controllers
 {
@@ -29,10 +32,120 @@ namespace university_project.Controllers
             _context = context;
         }
 
+        [Route("/secretary/assign-course")]
+        [HttpGet]
+        public async Task<IActionResult> AssignCourse()
+        {
+            AssignCourseData assignCourseData = new AssignCourseData();
+
+            assignCourseData.SelectCourse = new List<SelectListItem>();
+
+            var courses = await _context.Courses.ToListAsync();
+
+            foreach (var course in courses)
+            {
+                assignCourseData.IdCourse = course.IdCourse;
+            }
+
+            assignCourseData.SelectCourse = await PopulateListItemAsync();
+
+            return View(assignCourseData);
+        }
+
+        [Route("/secretary/assign-course")]
+        [HttpPost]
+        public async Task<IActionResult> AssignCourse(AssignCourseData model)
+        {
+            ModelState.Remove("SelectCourse");
+
+            if (ModelState.IsValid)
+            {
+                Student student = await _context.Students.Where( student => student.RegistrationNumber == model.RegistrationNumber ).FirstOrDefaultAsync();
+                
+                if (student == null)
+                {
+                    ModelState.AddModelError("RegistrationNumber", "Student doesn't exist");
+
+                    model.SelectCourse = await PopulateListItemAsync();
+
+                    return View(model);
+                }
+
+                CourseHasStudent courseHasStudent = new CourseHasStudent();
+
+                courseHasStudent.CourseIdCourse = model.IdCourse;
+                courseHasStudent.StudentsRegistrationNumber = model.RegistrationNumber;
+
+                await _context.CourseHasStudents.AddAsync( courseHasStudent );
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Secretary", "Dashboard");
+            }
+
+            return View();
+        }
+
+        [Route("/secretary/view/courses")]
+        [HttpGet]
+        public async Task<IActionResult> ViewCourses()
+        {
+            var courses = await _context.Courses.ToListAsync();
+
+
+            List<CourseData> courseDataList = new List<CourseData>();
+
+            foreach (var course in courses)
+            {
+                CourseData courseData = new CourseData();
+                courseData.Course = course;
+                
+                var selectSemester = courseData.SelectSemester.Where( sem => sem.Value == course.CourseSemester ).First(); 
+                selectSemester.Selected = true;
+                
+                var professor = await _context.Professors.Where ( prof => prof.Afm == course.ProfessorsAfm ).FirstAsync(); 
+
+                courseData.Professor = professor;
+
+                courseDataList.Add(courseData);
+            }
+
+            return View(courseDataList);
+        }
+
         [Route("/secretary/add/course")]
         public IActionResult AddCourse()
         {
-            return View();
+            return View(new Course());
+        }
+
+        [Route("/secretary/add/course")]
+        [HttpPost]
+        public async Task<IActionResult> AddCourse(Course model)
+        {
+            ModelState.Remove("ProfessorsAfmNavigation");
+            
+            if (ModelState.IsValid)
+            {
+                // get the professor based on their AFM
+                Professor professor = await _context.Professors.FindAsync(model.ProfessorsAfm);
+
+                // check if the professor exist, if not show error
+                if (professor == null)
+                {
+                    ModelState.AddModelError(string.Empty, "AFM of professor not found");
+                    return View(new Course());
+                }
+
+                // add course to the Course table
+                await _context.Courses.AddAsync(model);
+
+                await _context.SaveChangesAsync();
+                
+                return RedirectToAction("Secretary", "Dashboard");
+            }
+
+            return View(new Course());
         }
 
         [Route("/secretary/add/professor")]
@@ -159,6 +272,22 @@ namespace university_project.Controllers
                 throw new InvalidOperationException($"Can't create an instance of '{nameof(User)}'. " +
                     $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor.");
             }
+        }
+
+        private async Task<List<SelectListItem>> PopulateListItemAsync()
+        {
+            var courses = await _context.Courses.ToListAsync();
+
+            List<SelectListItem> selectCourseList = new List<SelectListItem>();
+
+            foreach (var course in courses)
+            {
+                selectCourseList.Add(
+                    new SelectListItem( text: course.CourseTitle, value: course.IdCourse.ToString() )
+                );
+            }
+
+            return selectCourseList;
         }
 
         private IUserEmailStore<EntityUser> GetEmailStore()

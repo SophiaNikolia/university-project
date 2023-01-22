@@ -1,0 +1,42 @@
+@model IEnumerable<university_project.ViewModels.CourseData>
+
+@{
+    ViewData["Title"] = "View Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>View Courses</h1>
+    <hr />
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Professor Name</th>
+                <th scope="col">Professor Surname</th>
+                <th scope="col">AFM</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <th scope="row">@course.Course.IdCourse</th>
+                    <td>@course.Course.CourseTitle</td>
+                    <td>@course.Course.CourseSemester</td>
+                    <td>@course.Professor.Name</td>
+                    <td>@course.Professor.Surname</td>
+                    <td>@course.Course.ProfessorsAfm</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
