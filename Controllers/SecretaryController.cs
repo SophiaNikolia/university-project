@@ -40,13 +40,6 @@ namespace university_project.Controllers
 
             assignCourseData.SelectCourse = new List<SelectListItem>();
 
-            var courses = await _context.Courses.ToListAsync();
-
-            foreach (var course in courses)
-            {
-                assignCourseData.IdCourse = course.IdCourse;
-            }
-
             assignCourseData.SelectCourse = await PopulateListItemAsync();
 
             return View(assignCourseData);
@@ -60,7 +53,7 @@ namespace university_project.Controllers
 
             if (ModelState.IsValid)
             {
-                Student student = await _context.Students.Where( student => student.RegistrationNumber == model.RegistrationNumber ).FirstOrDefaultAsync();
+                Student? student = await _context.Students.Where( student => student.RegistrationNumber == model.RegistrationNumber ).FirstOrDefaultAsync();
                 
                 if (student == null)
                 {
@@ -77,6 +70,61 @@ namespace university_project.Controllers
                 courseHasStudent.StudentsRegistrationNumber = model.RegistrationNumber;
 
                 await _context.CourseHasStudents.AddAsync( courseHasStudent );
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Secretary", "Dashboard");
+            }
+
+            return View();
+        }
+
+        [Route("/secretary/register-course")]
+        [HttpGet]
+        public async Task<IActionResult> RegisterCourse()
+        {
+            RegisterCourseData registerCourseData = new RegisterCourseData();
+
+            registerCourseData.SelectCourse = new List<SelectListItem>();
+
+            registerCourseData.SelectCourse = await PopulateListItemAsync();
+
+            return View(registerCourseData);
+        }
+
+        [Route("/secretary/register-course")]
+        [HttpPost]
+        public async Task<IActionResult> RegisterCourse(RegisterCourseData model)
+        {
+            ModelState.Remove("SelectCourse");
+
+            if (ModelState.IsValid)
+            {
+                Professor? professor = await _context.Professors.Where( professor => professor.Afm == model.ProfessorAfm ).FirstOrDefaultAsync();
+                
+                if (professor == null)
+                {
+                    ModelState.AddModelError("ProfessorAfm", "Professor doesn't exist");
+
+                    model.SelectCourse = await PopulateListItemAsync();
+
+                    return View(model);
+                }
+
+                Course? course = await _context.Courses.FindAsync(model.IdCourse);
+
+                if (course == null)
+                {
+                    ModelState.AddModelError("IdCourse", "Course doesn't exist");
+
+                    model.SelectCourse = await PopulateListItemAsync();
+
+                    return View(model);
+                }
+
+                course.ProfessorsAfm = model.ProfessorAfm;
+                
+                _context.Courses.Update(course);
 
                 await _context.SaveChangesAsync();
 
