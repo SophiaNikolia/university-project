@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using university_project.Areas.Identity.Data;
 using university_project.Models;
+using university_project.ViewModels;
 
 namespace university_project.Controllers
 {
@@ -38,7 +40,16 @@ namespace university_project.Controllers
 
             var secretary = _context.Secretaties.Where( e => e.UsersUsername.Equals(identityUser.UserName)).FirstOrDefault();
 
-            return View(secretary);
+            SecretaryDashboardData secretaryDashboardData = new SecretaryDashboardData();
+
+            secretaryDashboardData.Name = secretary.Name;
+            secretaryDashboardData.Surname = secretary.Surname;
+
+            secretaryDashboardData.ListedCourses = _context.Courses.ToList().Count;
+            secretaryDashboardData.ListedProfessors = _context.Professors.ToList().Count;
+            secretaryDashboardData.ListedStudents = _context.Students.ToList().Count;
+
+            return View(secretaryDashboardData);
             
         }
     }
