@@ -1,23 +1,23 @@
-@model university_project.ViewModels.AssignCourseData
+@model university_project.ViewModels.RegisterCourseData
 
 @{
-    ViewData["Title"] = "Assign Course";
+    ViewData["Title"] = "Register Course";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
-    <h1>Assign</h1>
+    <h1>Register</h1>
 
     <h4>Course</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-controller="Secretary" asp-action="AssignCourse" method="post" class="d-flex flex-column gap-3">
+            <form asp-controller="Secretary" asp-action="RegisterCourse" method="post" class="d-flex flex-column gap-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label class="control-label">Student's Id</label>
-                    <input asp-for="RegistrationNumber" type="tel" class="form-control" />
-                    <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                    <label class="control-label">Professors's AFM</label>
+                    <input asp-for="ProfessorAfm" type="tel" class="form-control" />
+                    <span asp-validation-for="ProfessorAfm" class="text-danger"></span>
                 </div>
                 <div class="form-group mt-2">
                     <label asp-for="IdCourse" class="control-label"></label>
@@ -25,7 +25,7 @@
                     <span asp-validation-for="IdCourse" class="text-danger"></span>
                 </div>
                 <div class="form-group d-flex mt-3 gap-3">
-                    <button type="submit" class="btn btn-primary">Assign</button>
+                    <button type="submit" class="btn btn-primary">Change</button>
                     <div class="align-self-center">
                         <a asp-controller="Dashboard" asp-action="Secretary">Back</a>
                     </div>

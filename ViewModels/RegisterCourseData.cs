@@ -5,11 +5,11 @@ using university_project.Models;
 
 namespace university_project.ViewModels
 {
-    public partial class AssignCourseData
+    public partial class RegisterCourseData
     {
         public long IdCourse { get; set; }
 
-        public long RegistrationNumber { get; set; }
+        public long ProfessorAfm { get; set; }
 
         public List<SelectListItem> SelectCourse { get; set; }
 
