@@ -1,0 +1,46 @@
+@model university_project.ViewModels.GradeStudentData
+
+@{
+    ViewData["Title"] = "Grade Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Grade</h1>
+
+    <h4>Student</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Professor" asp-action="GradeStudent" method="post" class="d-flex flex-column gap-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Student's Id</label>
+                    <input asp-for="CourseHasStudent.StudentsRegistrationNumber" type="tel" class="form-control" readonly />
+                    <span asp-validation-for="CourseHasStudent.StudentsRegistrationNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Course's Id</label>
+                    <input asp-for="CourseHasStudent.CourseIdCourse" type="tel" class="form-control" readonly />
+                    <span asp-validation-for="CourseHasStudent.CourseIdCourse" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="control-label">Grade</label>
+                    <select asp-for="CourseHasStudent.GradeCourseStudent" asp-items="Model.SetGrade" class="form-select" aria-label="-"></select>
+                    <span asp-validation-for="CourseHasStudent.GradeCourseStudent" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex mt-3 gap-3">
+                    <button type="submit" class="btn btn-primary">Grade</button>
+                    <div class="align-self-center">
+                        <a asp-controller="Professor" asp-action="Pending">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
