@@ -22,14 +22,24 @@ namespace university_project.Controllers
 
         public async Task<IActionResult> Done()
         {
-            return View();
+            var identityUser = await _signInManager.UserManager.GetUserAsync(User);
+
+            var professor = _context.Professors
+                .Where( e => e.UsersUsername.Equals(identityUser.UserName))
+                .FirstOrDefault();
+
+            var doneCourses = DoneCoursesAsync(professor);
+
+            return View(await doneCourses);
         }
 
         public async Task<IActionResult> Pending()
         {
             var identityUser = await _signInManager.UserManager.GetUserAsync(User);
 
-            var professor = _context.Professors.Where( e => e.UsersUsername.Equals(identityUser.UserName)).FirstOrDefault();
+            var professor = _context.Professors
+                .Where( e => e.UsersUsername.Equals(identityUser.UserName))
+                .FirstOrDefault();
 
             var pendingCourses = PendingCoursesAsync(professor);
 
@@ -41,7 +51,9 @@ namespace university_project.Controllers
         public async Task<IActionResult> GradeStudent(long? StudentRegistrationNumber, long? IdCourse)
         {
             var courseHasStudent = await _context.CourseHasStudents
-                .FirstOrDefaultAsync(course => course.StudentsRegistrationNumber == StudentRegistrationNumber && course.CourseIdCourse == IdCourse);
+                .FirstOrDefaultAsync(course => 
+                    course.StudentsRegistrationNumber == StudentRegistrationNumber 
+                    && course.CourseIdCourse == IdCourse);
                 
             GradeStudentData gradeStudentData = new GradeStudentData();
 
@@ -74,7 +86,9 @@ namespace university_project.Controllers
 
         private async Task<IEnumerable<PendingCoursesData>> PendingCoursesAsync(Professor professor)
         {
-            var courseList = await _context.Courses.Where( course => course.ProfessorsAfm == professor.Afm ).ToListAsync();
+            var courseList = await _context.Courses
+                .Where( course => course.ProfessorsAfm == professor.Afm )
+                .ToListAsync();
 
             var courseHasStudents = await _context.CourseHasStudents.ToListAsync();
 
@@ -97,6 +111,35 @@ namespace university_project.Controllers
                                                     return pendingCourse;
                                                 });
             return pendingCourses;
+        }
+    
+        private async Task<IEnumerable<PendingCoursesData>> DoneCoursesAsync(Professor professor)
+        {
+            var courseList = await _context.Courses
+                .Where( course => course.ProfessorsAfm == professor.Afm )
+                .ToListAsync();
+
+            var courseHasStudents = await _context.CourseHasStudents.ToListAsync();
+
+            var doneCourses = courseList.Join( courseHasStudents,
+                                                course => course.IdCourse,
+                                                courseHasStudent => courseHasStudent.CourseIdCourse,
+                                                (course, courseHasStudent) => {
+                                                    
+                                                    PendingCoursesData pendingCourse = new PendingCoursesData();
+
+                                                    if(courseHasStudent.GradeCourseStudent >= 5)
+                                                    {
+                                                        pendingCourse.IdCourse = course.IdCourse;
+                                                        pendingCourse.CourseTitle = course.CourseTitle;
+                                                        pendingCourse.CourseSemester = course.CourseSemester;
+                                                        pendingCourse.Grade = courseHasStudent.GradeCourseStudent;
+                                                        pendingCourse.StudentRegistrationNumber = courseHasStudent.StudentsRegistrationNumber;
+                                                    }
+
+                                                    return pendingCourse;
+                                                });
+            return doneCourses;
         }
     }
 }
