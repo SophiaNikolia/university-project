@@ -28,9 +28,33 @@ namespace university_project.Controllers
             return View();
         }
 
-        public IActionResult Professor()
+        public async Task<IActionResult> Professor()
         {
-            return View();
+            var identityUser = await _signInManager.UserManager.GetUserAsync(User);
+
+            var professor = await _context.Professors.Where( e => e.UsersUsername.Equals(identityUser.UserName)).FirstOrDefaultAsync();
+
+            ProfessorDashboardData professorDashboardData = new ProfessorDashboardData();
+
+            professorDashboardData.Name = professor.Name;
+            professorDashboardData.Surname = professor.Surname;
+
+            professorDashboardData.Students = _context.Courses.ToList().Join( _context.CourseHasStudents.ToList(),
+                                                course => course.IdCourse,
+                                                courseHasStudent => courseHasStudent.CourseIdCourse,
+                                                (course, courseHasStudent) => {
+
+                                                    if(course.ProfessorsAfm == professor.Afm && courseHasStudent.GradeCourseStudent <= 4)
+                                                    {
+                                                        return true;
+                                                    }
+
+                                                    return false;
+                                                }).Count( item => item == true );
+
+            professorDashboardData.Courses = _context.Courses.Where(course => course.ProfessorsAfm == professor.Afm).Count();
+
+            return View(professorDashboardData);
         }
 
         public async Task<IActionResult> Secretary()
