@@ -1,0 +1,44 @@
+@model IEnumerable<university_project.ViewModels.PendingCoursesData>
+
+@{
+    ViewData["Title"] = "Done Grades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Pending Grades</h1>
+    <hr />
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Registration Number</th>
+                <th scope="col">Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model)
+            {
+                @if(data.IdCourse != 0)
+                {
+                    <tr>
+                        <th scope="row">@data.IdCourse</th>
+                        <td>@data.CourseTitle</td>
+                        <td>@data.CourseSemester</td>
+                        <td>@data.StudentRegistrationNumber</td>
+                        <td>@data.Grade</td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
