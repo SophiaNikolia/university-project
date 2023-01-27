@@ -23,9 +23,46 @@ namespace university_project.Controllers
             _context = context;
         }
 
-        public IActionResult Student()
+        public async Task<IActionResult> Student()
         {
-            return View();
+            var identityUser = await _signInManager.UserManager.GetUserAsync(User);
+
+            var student = _context.Students.Where(e => e.UsersUsername.Equals(identityUser.UserName)).FirstOrDefault();
+
+            var courses = _context.CourseHasStudents.Where(e => e.StudentsRegistrationNumber == student.RegistrationNumber).FirstOrDefault();
+
+            var passed_lesson = _context.CourseHasStudents
+                .Where(e => e.GradeCourseStudent >= 5 && e.StudentsRegistrationNumber == student.RegistrationNumber);
+
+            long? sum = 0;
+            foreach (var i in passed_lesson)
+            {
+                sum += i.GradeCourseStudent;
+
+            }
+
+            var gpa = sum / (decimal)passed_lesson.Count();
+            
+            DashboardStudentData model = new DashboardStudentData();
+
+            model.StudentName = student.Name;
+            model.StudentSurname = student.Surname;
+            if (gpa == null)
+            {
+                model.Gpa = 0;
+                model.CompletedCourses = 0;
+                model.Ects = 0;
+            }
+            else
+            {
+                model.Gpa = Math.Round((decimal)gpa, 2);
+            }
+
+            model.CompletedCourses = passed_lesson.Count();
+
+            model.Ects = passed_lesson.Count() * 5;
+
+            return View(model);
         }
 
         public async Task<IActionResult> Professor()
