@@ -42,7 +42,7 @@ namespace university_project.Controllers
             }
 
             var changePasswordResult = await _signInManager.UserManager
-                .ChangePasswordAsync(identityUser, changePasswordData.OldPassword, changePasswordData.OldPassword);
+                .ChangePasswordAsync(identityUser, changePasswordData.OldPassword, changePasswordData.NewPassword);
 
             if (!changePasswordResult.Succeeded)
             {
