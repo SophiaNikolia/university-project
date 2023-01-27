@@ -1,4 +1,11 @@
-﻿<div class="container">
+﻿@using Microsoft.AspNetCore.Identity
+@using university_project.Areas.Identity.Data
+
+@model university_project.ViewModels.DashboardStudentData
+
+@inject SignInManager<EntityUser> SignInManager
+
+<div class="container">
     <div class="row">
         @*left part*@
         <div class="col-2 ms-5 mt-3 rounded outline" style="">
@@ -11,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a href="#" class="p-0 nav-link text-dark font-italic butn fs-4">
+                    <a asp-controller="Student" asp-action="Grades" class="p-0 nav-link text-dark font-italic butn fs-4">
                         <i class="fa-solid fa-graduation-cap"></i>
                         Grades
                     </a>
@@ -47,7 +54,7 @@
                             <img src="~/img/profile-img.png" class="rounded-circle h-auto me-2" style="width:12%">
 
                             <a class="dropdown-toggle blacktxt prf" data-bs-toggle="dropdown" aria-expanded="false">
-                                Name
+                                @Model.StudentName @Model.StudentSurname[0].
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -124,7 +131,7 @@
                         <div class="card outline text-center hovered" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="fa-solid fa-gauge-high"></i> GPA</h5>
-                                <span class="fs-1">No.</span>
+                                <span class="fs-1">@Model.Gpa</span>
                             </div>
                         </div>
             
@@ -134,7 +141,7 @@
                         <div class="card outline text-center hovered" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="fa-solid fa-book"></i> Completed Courses</h5>
-                                <span class="fs-1">No.</span>
+                                <span class="fs-1">@Model.CompletedCourses</span>
                             </div>
                         </div>
                     </div>
@@ -143,7 +150,7 @@
                         <div class="card outline text-center hovered" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="fa-solid fa-chart-simple"></i> ECTs</h5>
-                                <span class="fs-1">No.</span>
+                                <span class="fs-1">@Model.Ects</span>
                             </div>
                         </div>
                     </div>
