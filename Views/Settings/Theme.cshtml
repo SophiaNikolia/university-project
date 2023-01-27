@@ -7,6 +7,13 @@
         @* Main settings *@
         <div class="col col-md-9">
             <h2>Theme</h2>
+
+            <button id="changeThemeOfApp" onclick="change()" class="btn btn-primary">Change</button>
+            <a href="#" id="changeTheme" onclick="change()" class="btn btn-primary">Change</a>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
