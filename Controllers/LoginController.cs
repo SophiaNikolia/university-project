@@ -46,6 +46,11 @@ namespace university_project.Controllers
                     return View();
                 }
 
+                if (await _signInManager.UserManager.IsInRoleAsync(usr, "Admin"))
+                {
+                    return View();
+                }
+
                 var roles = await _signInManager.UserManager.GetRolesAsync(usr);
 
                 // The first entry is the user's role
