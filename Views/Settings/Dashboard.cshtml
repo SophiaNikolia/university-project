@@ -1,3 +1,8 @@
+@{
+    ViewData["Title"] = "Dashboard Color";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <div class="container">
     <h1>Settings</h1>
     <div class="row mt-5 flex-column flex-md-row gap-4 gap-md-0">
@@ -6,7 +11,34 @@
         </div>
         @* Main settings *@
         <div class="col col-md-9">
-            <h2>Dashboard</h2>
+            <h2>Dashboard Color</h2>
+
+            <div class="row justify-content-center gap-3 p-3">
+                <a href="#" id="defaultTheme" onclick="changeDashboardToDefault()" class="col d-flex flex-column justify-content-center align-items-center gap-2 text-dark text-decoration-none bg-white border border-dark p-4 rounded">
+                    <svg height="100" width="100">
+                        <circle cx="50" cy="50" r="20" stroke="black" stroke-width="1.5" fill="var(--theme-darkslate)" />
+                    </svg> 
+                    <span class="fs-5">Default</span>
+                </a>
+                <a href="#" id="blueTheme" onclick="changeDashboardToBlue()" class="col d-flex flex-column justify-content-center align-items-center gap-2 text-dark text-decoration-none bg-white border border-dark p-4 rounded">
+                    <svg height="100" width="100">
+                        <circle cx="50" cy="50" r="20" stroke="black" stroke-width="1.5" fill="var(--theme-blue)" />
+                    </svg> 
+                    <span class="fs-5">Blue</span>
+                </a>
+                <a href="#" id="orangeTheme" onclick="changeDashboardToOrange()" class="col d-flex flex-column justify-content-center align-items-center gap-2 text-dark text-decoration-none bg-white border border-dark p-4 rounded">
+                    <svg height="100" width="100">
+                        <circle cx="50" cy="50" r="20" stroke="black" stroke-width="1.5" fill="var(--theme-orange)" />
+                    </svg> 
+                    <span class="fs-5">Orange</span>
+                </a>
+                <a href="#" id="purpleTheme" onclick="changeDashboardToPurple()" class="col d-flex flex-column justify-content-center align-items-center gap-2 text-dark text-decoration-none bg-white border border-dark p-4 rounded">
+                    <svg height="100" width="100">
+                        <circle cx="50" cy="50" r="20" stroke="black" stroke-width="1.5" fill="var(--theme-purple)" />
+                    </svg> 
+                    <span class="fs-5">Purple</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

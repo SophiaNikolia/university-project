@@ -3,6 +3,11 @@
 
 @model university_project.ViewModels.DashboardStudentData
 
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 @inject SignInManager<EntityUser> SignInManager
 
 <div class="container">
@@ -10,21 +15,21 @@
         @*left part*@
         <div class="col-2 ms-5 mt-3 rounded outline" style="">
             <h2 class="mt-2">UniApp</h2>
-            <ul class="nav flex-column bg-white mb-0 ">
+            <ul class="nav flex-column mb-0 ">
                 <li class="nav-item mt-3 mb-3">
-                    <a href="#" class="butn p-0 nav-link text-dark font-italic fs-4">
+                    <a href="#" class="butn p-0 nav-link text-body font-italic fs-4">
                         <i class="fa-solid fa-border-all"></i>
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a asp-controller="Student" asp-action="Grades" class="p-0 nav-link text-dark font-italic butn fs-4">
+                    <a asp-controller="Student" asp-action="Grades" class="p-0 nav-link text-body font-italic butn fs-4">
                         <i class="fa-solid fa-graduation-cap"></i>
                         Grades
                     </a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a href="#" class=" p-0 nav-link text-dark font-italic butn fs-4">
+                    <a href="#" class=" p-0 nav-link text-body font-italic butn fs-4">
                         <i class="fa-solid fa-chart-line"></i> 
                         Graphs
                     </a>
@@ -54,7 +59,7 @@
                             <img src="~/img/profile-img.png" class="rounded-circle h-auto me-2" style="width:12%">
 
                             <a class="dropdown-toggle blacktxt prf" data-bs-toggle="dropdown" aria-expanded="false">
-                                @Model.StudentName @Model.StudentSurname[0].
+                                <span class="text-body">@Model.StudentName @Model.StudentSurname[0].</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>

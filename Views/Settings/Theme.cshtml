@@ -1,3 +1,8 @@
+@{
+    ViewData["Title"] = "Change Theme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <div class="container">
     <h1>Settings</h1>
     <div class="row mt-5 flex-column flex-md-row gap-4 gap-md-0">
@@ -8,8 +13,16 @@
         <div class="col col-md-9">
             <h2>Theme</h2>
 
-            <button id="changeThemeOfApp" onclick="change()" class="btn btn-primary">Change</button>
-            <a href="#" id="changeTheme" onclick="change()" class="btn btn-primary">Change</a>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" id="lightTheme" onclick="changeToLight()" class="d-flex flex-column justify-content-center align-items-center gap-2 text-dark text-decoration-none bg-white border border-dark p-5 rounded">
+                    <i class="fa-solid fa-sun fs-2"></i>
+                    <span class="fs-5">Light mode</span>
+                </a>
+                <a href="#" id="darkTheme" onclick="changeToDark()" class="d-flex flex-column justify-content-center align-items-center gap-2 text-white text-decoration-none border border-light bg-dark p-5 rounded">
+                    <i class="fa-solid fa-moon fs-2"></i>
+                    <span class="fs-5">Dark mode</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

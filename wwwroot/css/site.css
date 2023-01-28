@@ -1,3 +1,22 @@
+:root {
+    --theme-orange: hsla(31, 80%, 45%, 1);
+    --theme-hover-orange: hsla(31, 75%, 60%, 1);
+
+    --theme-darkslate: darkslategrey;
+    --theme-hover-darkslate: hsla(180, 17%, 43%, 1);
+
+    --theme-blue: hsla(206, 80%, 39%, 1);
+    --theme-hover-blue: hsla(206, 70%, 55%, 1);
+
+
+    --theme-purple: hsla(275, 46%, 47%, 1);
+    --theme-hover-purple: hsla(275, 49%, 62%, 1);
+
+
+    --theme: var(--theme-darkslate);
+    --theme-hover: var(--theme-hover-darkslate);
+}
+
 html {
     font-size: 14px;
 }

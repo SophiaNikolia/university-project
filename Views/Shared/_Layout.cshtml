@@ -19,15 +19,14 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="~/img/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
 </head>
-<body class="d-flex flex-column vh-100" onload="loadTheme()">
+<body class="d-flex flex-column vh-100">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/img/logo.svg" alt="Logo" width="50" height="50">
-                    <span class="text-body">UniApp</span>
+                    <span class="text-dark">UniApp</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +63,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script defer src="~/js/loadTheme.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/cd146827cd.js" crossorigin="anonymous"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
