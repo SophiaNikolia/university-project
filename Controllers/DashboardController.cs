@@ -29,10 +29,17 @@ namespace university_project.Controllers
 
             var student = _context.Students.Where(e => e.UsersUsername.Equals(identityUser.UserName)).FirstOrDefault();
 
-            var courses = _context.CourseHasStudents.Where(e => e.StudentsRegistrationNumber == student.RegistrationNumber).FirstOrDefault();
-
             var passed_lesson = _context.CourseHasStudents
                 .Where(e => e.GradeCourseStudent >= 5 && e.StudentsRegistrationNumber == student.RegistrationNumber);
+
+            var notPassedCourses = _context.CourseHasStudents
+                .Where(e => e.GradeCourseStudent < 5 && e.StudentsRegistrationNumber == student.RegistrationNumber);
+
+            var notPassedCoursesData = _context.Courses
+                .Join(notPassedCourses,
+                        course => course.IdCourse,
+                        courseHasStudent => courseHasStudent.CourseIdCourse,
+                        (course, courseHasStudent) => course);
 
             long? sum = 0;
             foreach (var i in passed_lesson)
@@ -61,6 +68,24 @@ namespace university_project.Controllers
             model.CompletedCourses = passed_lesson.Count();
 
             model.Ects = passed_lesson.Count() * 5;
+
+            model.DashboardCardDataList = new List<DashboardCardData>();
+
+            foreach (var course in await notPassedCoursesData.ToListAsync())
+            {
+                DashboardCardData dashboardCardData = new DashboardCardData();
+
+                dashboardCardData.CourseTitle = course.CourseTitle;
+
+                var professor = await _context.Professors.FindAsync(course.ProfessorsAfm);
+
+                dashboardCardData.ProfessorName = professor.Name;
+                dashboardCardData.ProfessorSurname = professor.Surname;
+
+                dashboardCardData.CourseSemester = int.Parse(course.CourseSemester);
+
+                model.DashboardCardDataList.Add(dashboardCardData);
+            }
 
             return View(model);
         }
