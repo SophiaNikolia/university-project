@@ -1,0 +1,31 @@
+﻿.table-bg {
+    background-color: darkslategrey;
+    color: white;
+}
+.whitetxt {
+    color: white;
+}
+.border {
+    border-color: darkslategrey;
+    border-radius: 0.2em;
+}
+
+.bluetxt1 {
+    color: darkslategrey;
+}
+
+.bluetxt2 {
+    color: #5b8080;
+}
+
+.notbold {
+    font-weight: normal;
+}
+
+.underline {
+    text-decoration: underline #5b8080;
+}
+
+.table tr:hover {
+    background: #5b8080;
+}

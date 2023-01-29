@@ -9,5 +9,6 @@
         public long? CourseGrade { get; set; }
 
         public double SemesterGrade { get; set; }
+
     }
 }
