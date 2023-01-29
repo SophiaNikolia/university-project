@@ -37,3 +37,20 @@
 .prf {
     text-decoration: none;
 }
+
+.bluetxt1 {
+    color: darkslategrey;
+}
+
+.bluetxt2 {
+    color: #5b8080;
+}
+
+.table tr:hover {
+    background: #5b8080;
+}
+
+.table-bg {
+    background-color: darkslategrey;
+    color: white;
+}
