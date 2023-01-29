@@ -121,12 +121,30 @@
                         </div>*@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <div class="card cards-color" style="width: 18rem;">
-                                    <div class="card-body hovered whitetxt">
-                                        <h5 class="card-title">Subject Name</h5>
-                                        <h6 class="card-subtitle mb-2 ">Total hours:</h6>
-                                        <h6 class="card-subtitle mb-2 ">No.</h6>
-                                    </div>
+                                <div class="row gap-3">
+                                    @if (Model.DashboardCardDataList.Count > 0)
+                                    {
+                                        @foreach (var courseCard in Model.DashboardCardDataList)
+                                        {
+                                            <div class="card cards-color" style="width: 18rem;">
+                                                <div class="card-body hovered whitetxt">
+                                                    <h5 class="card-title">@courseCard.CourseTitle</h5>
+                                                    <div class="d-flex gap-2 mt-4">
+                                                        <h6 class="card-subtitle mb-2 ">Semester :</h6>
+                                                        <h6 class="card-subtitle mb-2 ">@courseCard.CourseSemester</h6>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <h6 class="card-subtitle mb-2 ">Total hours :</h6>
+                                                        <h6 class="card-subtitle mb-2 ">@courseCard.CourseTotalHours</h6>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>NO COURSES FOUND</span>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -145,7 +163,7 @@
                         <div class="card outline text-center hovered" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title"><i class="fa-solid fa-clock"></i> Hours</h5>
-                                <span class="fs-1">No.</span>
+                                <span class="fs-1">@Model.Hours</span>
                             </div>
                         </div>
             
