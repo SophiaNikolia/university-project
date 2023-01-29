@@ -89,7 +89,25 @@ namespace university_project.Controllers
                                                     return false;
                                                 }).Count( item => item == true );
 
-            professorDashboardData.Courses = _context.Courses.Where(course => course.ProfessorsAfm == professor.Afm).Count();
+            var courses = _context.Courses.Where(course => course.ProfessorsAfm == professor.Afm);
+
+            professorDashboardData.Courses = courses.Count();
+
+            professorDashboardData.DashboardCardDataList = new List<DashboardCardData>();
+            professorDashboardData.Hours = 0;
+            foreach (var course in courses)
+            {
+                DashboardCardData dashboardCardData = new DashboardCardData();
+
+                dashboardCardData.CourseTitle = course.CourseTitle;
+                dashboardCardData.CourseTotalHours = 25;
+                dashboardCardData.ProfessorName = professorDashboardData.Name;
+                dashboardCardData.CourseSemester = int.Parse(course.CourseSemester);
+                
+                professorDashboardData.Hours += dashboardCardData.CourseTotalHours;
+
+                professorDashboardData.DashboardCardDataList.Add(dashboardCardData);
+            }
 
             return View(professorDashboardData);
         }
