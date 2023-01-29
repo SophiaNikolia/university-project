@@ -11,11 +11,13 @@ namespace university_project.ViewModels
 
         public string Surname { get; set; }
 
-        public int Hours { get; set; }
+        public int? Hours { get; set; }
 
         public int Courses { get; set; }
 
         public int Students { get; set; }
+
+        public List<DashboardCardData>? DashboardCardDataList { get; set; } 
 
     }
 }
