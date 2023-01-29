@@ -4,14 +4,18 @@
 }
 
 <div class="container">
-    <h1>Settings</h1>
+    <h1 class="bluetext1"><i class="fa-solid fa-gear"></i> Settings</h1>
     <div class="row mt-5 flex-column flex-md-row gap-4 gap-md-0">
         <div class="col col-md-3">
             @await Html.PartialAsync("_SettingsPartial")
         </div>
         @* Main settings *@
         <div class="col col-md-9">
-            <h2>Personal data</h2>
+            <h2 class="bluetxt2">Personal data</h2>
+            <h5 class="mt-5 col col-md-9 text-center">The privacy of our website visitors is very important to us, and we are 
+                committed to safeguarding it. We can assure you that your personal data are safe and no one has access to them! 
+                Consenting to our use of cookies in accordance with the terms of this policy 
+                when you first visit our website permits us to use cookies every time you visit our website. </h5>
         </div>
     </div>
 </div>
