@@ -6,44 +6,58 @@
 }
 
 <div class="container">
-    <h1>My grades</h1>
-    <hr />
+    <h1 class="bluetxt1"><i class="fa-solid fa-user-graduate"></i> My grades</h1>
 
-    
-       
+        @{ 
+            long? sum = 0;
+            int count= 0;
+        }
         
-            @if (Model.Count() > 0)
+        @if (Model.Count() > 0)
+        {
+            @for (var i = 1; i < 9; i++)
             {
-                @for (var i = 1; i < 9; i++)
-                {
-                    <table class="table table-hover">
-                        <h5 class="mb-3 mt-3">Semester @i</h5>
-                        <thead>
-                            <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Semester</th>
-                                <th scope="col">Grade</th>
-                            </tr>
-                        </thead>
-                        @foreach (var data in Model.Where( courseData => int.Parse(courseData.Semester) == i ))
-                        {
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">@data.CourseTitle</th>
-                                        <td>@data.Semester</td>
-                                        <td>@data.CourseGrade</td>
-                                    </tr>
-                                </tbody>
-                                <h5>Semester's Gpa </h5>
-                        }
-                    </table>
-                }
+                <table class="table table-hover table-bordered table-sm">
+                    <h5 class="mb-3 mt-5 bluetxt2">Semester @i</h5>
+                    <thead class=" table-bg whitetxt">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Semester</th>
+                            <th scope="col">Grade</th>
+                        </tr>
+                    </thead>
 
-                
-                
+                    @foreach (var data in Model.Where( courseData => int.Parse(courseData.Semester) == i ))
+                    {
+                            <tbody class="notbold">
+                                <tr>
+                                    <th scope="row">@data.CourseTitle</th>
+                                    <td>@data.Semester</td>
+                                    <td>@data.CourseGrade</td>
+                                </tr>
+                            </tbody>
+
+                            @if (data.CourseGrade >= 5)
+                            {
+                                sum += data.CourseGrade;
+                                count += 1;
+                            } 
+                    }
+                       
+                </table>
+                @if (count != 0)
+                {
+                    var SemesterGrade = sum / count;
+                    <h5 class="mb-5 mt-3 notbold underline"><i class="fa-solid fa-graduation-cap" ></i> Semester's Gpa: @SemesterGrade</h5>
+                }
+                else{
+                    <h5 class="mb-5 mt-3 notbold underline"><i class="fa-solid fa-graduation-cap"></i> Semester's Gpa: 0</h5>
+                }
+                sum = 0;
+                count = 0;
             }
 
-    
+        }
 
 </div>
 

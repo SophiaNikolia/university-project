@@ -27,7 +27,6 @@ namespace university_project.Controllers
 
             var courseGrades = CourseGradesAsync(student);
 
-
             return View(await courseGrades);
         }
 
@@ -39,7 +38,6 @@ namespace university_project.Controllers
             var courseHasStudents = await _context.CourseHasStudents
                 .Where( course => course.StudentsRegistrationNumber == student.RegistrationNumber )
                 .ToListAsync();
-
             var courseGrades = courseList.Join(courseHasStudents,
                                                 course => course.IdCourse,
                                                 courseHasStudent => courseHasStudent.CourseIdCourse,
@@ -53,6 +51,7 @@ namespace university_project.Controllers
 
                                                     return gradesData;
                                                 });
+
             return courseGrades;
         }
     }
