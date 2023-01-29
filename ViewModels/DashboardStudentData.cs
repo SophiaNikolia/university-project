@@ -10,5 +10,8 @@
         public decimal? Gpa { get; set; }
         public int? CompletedCourses { get; set; }
         public int? Ects { get; set; }
+
+        public List<DashboardCardData>? DashboardCardDataList { get; set; } 
+
     }
 }

@@ -34,3 +34,19 @@ function changeToDark() {
     localStorage.setItem("theme", app.dataset.bsTheme);
     document.querySelectorAll()
 }
+
+function next() {
+    document.getElementById('carousel').scrollBy({
+        top: 0,
+        left: 600,
+        behavior: "smooth"
+    });
+}
+
+function prev() {
+    document.getElementById('carousel').scrollBy({
+        top: 0,
+        left: -600,
+        behavior: "smooth"
+    });
+}

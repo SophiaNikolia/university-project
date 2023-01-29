@@ -86,9 +86,9 @@
             </div>
 
             @*My courses*@
-            <div class="rounded" style="">
+            <div class="bg rounded">
 
-                <div class="row p-5 bg ">
+                <div class="row p-5 overflow-x-auto text-nowrap">
                 
                     <div class="row">
                         <div class="col-12 col-lg-10">
@@ -96,34 +96,38 @@
                         </div>
 
                         <div class="col col-lg-2 text-right">
-                            <a class="btn btn-color mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                           <a id="prev" onclick="prev()" class="btn btn-color mb-3 mr-1" href="#" role="button">
                                 <i class="fa-solid fa-chevron-left whitetxt"></i>
                             </a>
-                            <a class="btn btn-color mb-3 " href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <a id="next" onclick="next()" class="btn btn-color mb-3 " href="#" role="button">
                                 <i class="fa-solid fa-chevron-right whitetxt"></i>
                             </a>
                         </div>
 
                     </div>
 
-                    <div id="carouselExampleIndicators" class=" gy-4 carousel slide" data-bs-ride="true">
-                        @*<div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        </div>*@
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="card cards-color" style="width: 18rem;">
-                                    <div class="card-body hovered whitetxt">
-                                        <h5 class="card-title">Subject Name</h5>
-                                        <h6 class="card-subtitle mb-2 ">Lecturer</h6>
-                                        <h6 class="card-subtitle mb-2 ">Lecturer's Name</h6>
+                    <div id="carousel" class="d-flex flex-nowrap gap-3 overflow-x-hidden">
+                        @if (Model.DashboardCardDataList.Count > 0)
+                        {
+                            @foreach (var course in Model.DashboardCardDataList)
+                            {
+                                <span class="flex-nowrap text-nowrap">
+                                    <div class="card cards-color" style="width: 18rem;">
+                                        <div class="card-body hovered whitetxt">
+                                            <h5 class="card-title">@course.CourseTitle</h5>
+                                            <div class="d-flex gap-2 mt-4">
+                                                <h6 class="card-subtitle mb-2 ">Semester :</h6>
+                                                <h6 class="card-subtitle mb-2 ">@course.CourseSemester</h6>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <h6 class="card-subtitle mb-2 ">Professor :</h6>
+                                                <h6 class="card-subtitle mb-2 ">@course.ProfessorSurname @course.ProfessorName[0]</h6>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        
+                                </span>
+                            }
+                        }
                     </div>
                 </div>
             </div>

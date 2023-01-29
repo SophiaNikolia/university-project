@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace university_project.Models
 {
@@ -10,7 +11,9 @@ namespace university_project.Models
             Courses = new HashSet<Course>();
         }
 
-        public long Afm { get; set; }
+        [StringLength(11, ErrorMessage = "AFM must be 11 characters long")]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Only numbers are allowed.")]
+        public string Afm { get; set; }
         public string Name { get; set; } = null!;
         public string Surname { get; set; } = null!;
         public string Department { get; set; } = null!;

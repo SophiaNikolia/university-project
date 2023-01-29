@@ -100,7 +100,7 @@ namespace university_project.Controllers
 
             if (ModelState.IsValid)
             {
-                Professor? professor = await _context.Professors.Where( professor => professor.Afm == model.ProfessorAfm ).FirstOrDefaultAsync();
+                Professor? professor = await _context.Professors.Where( professor => professor.Afm.Equals(model.ProfessorAfm) ).FirstOrDefaultAsync();
                 
                 if (professor == null)
                 {
