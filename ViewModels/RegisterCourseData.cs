@@ -10,7 +10,7 @@ namespace university_project.ViewModels
     {
         public long IdCourse { get; set; }
 
-        [StringLength(11, ErrorMessage = "AFM must be 11 characters long")]
+        [StringLength(9, ErrorMessage = "AFM must be 9 characters long")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Only numbers are allowed.")]
         public string ProfessorAfm { get; set; }
 

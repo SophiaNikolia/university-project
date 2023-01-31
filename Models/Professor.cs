@@ -11,7 +11,7 @@ namespace university_project.Models
             Courses = new HashSet<Course>();
         }
 
-        [StringLength(11, ErrorMessage = "AFM must be 11 characters long")]
+        [StringLength(9, ErrorMessage = "AFM must be 9 characters long")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Only numbers are allowed.")]
         public string Afm { get; set; }
         public string Name { get; set; } = null!;

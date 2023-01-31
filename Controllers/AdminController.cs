@@ -145,16 +145,8 @@ namespace university_project.Controllers
         [Route("/admin/create/secretary")]
         public async Task<IActionResult> Secretary(NewUser model)
         {
-            ModelState.Remove("Professor");
-            ModelState.Remove("User");
             ModelState.Remove("Secretary.UsersUsernameNavigation");
             ModelState.Remove("Secretary.UsersUsername");
-
-            string validationErrors = string.Join(",",
-                                ModelState.Values.Where(E => E.Errors.Count > 0)
-                                .SelectMany(E => E.Errors)
-                                .Select(E => E.ErrorMessage)
-                                .ToArray());
 
             string username = TempData["username"].ToString();
 
@@ -164,7 +156,7 @@ namespace university_project.Controllers
 
                 model.Secretary.UsersUsername = user.Username;
                 
-                await _context.Secretaties.AddAsync(model.Secretary);
+                await _context.Secretaries.AddAsync(model.Secretary);
 
                 await _context.SaveChangesAsync();
 

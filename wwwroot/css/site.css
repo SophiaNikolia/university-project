@@ -52,6 +52,22 @@ body {
     cursor: pointer;
 }
 
+.error {
+    background-color: red;
+    color: white;
+    padding: .5rem .7rem;
+    font-size: 1.2rem;
+}
+
+.error ul{
+    margin: 0;
+    padding: .3em 0;
+}
+
+.list-style-none > *{
+    list-style: none;
+}
+
 /* MD breakpoint*/
 @media (min-width: 576px) {
     .w-sm-25 {

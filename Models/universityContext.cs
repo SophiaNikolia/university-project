@@ -20,7 +20,7 @@ namespace university_project.Models
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<CourseHasStudent> CourseHasStudents { get; set; } = null!;
         public virtual DbSet<Professor> Professors { get; set; } = null!;
-        public virtual DbSet<Secretary> Secretaties { get; set; } = null!;
+        public virtual DbSet<Secretary> Secretaries { get; set; } = null!;
         public virtual DbSet<Student> Students { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
@@ -100,14 +100,14 @@ namespace university_project.Models
             {
                 entity.HasKey(e => e.Phonenumber);
 
-                entity.ToTable("secretaties");
+                entity.ToTable("secretaries");
 
                 entity.Property(e => e.Phonenumber).ValueGeneratedNever();
 
                 entity.Property(e => e.UsersUsername).HasColumnName("USERS_username");
 
                 entity.HasOne(d => d.UsersUsernameNavigation)
-                    .WithMany(p => p.Secretaties)
+                    .WithMany(p => p.Secretaries)
                     .HasForeignKey(d => d.UsersUsername)
                     .OnDelete(DeleteBehavior.Cascade);
             });
