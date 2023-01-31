@@ -164,7 +164,7 @@ namespace university_project.Controllers
 
                 model.Secretary.UsersUsername = user.Username;
                 
-                await _context.Secretaties.AddAsync(model.Secretary);
+                await _context.Secretaries.AddAsync(model.Secretary);
 
                 await _context.SaveChangesAsync();
 

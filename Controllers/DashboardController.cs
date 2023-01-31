@@ -142,7 +142,7 @@ namespace university_project.Controllers
 
             var identityUser = await _signInManager.UserManager.GetUserAsync(User);
 
-            var secretary = _context.Secretaties.Where( e => e.UsersUsername.Equals(identityUser.UserName)).FirstOrDefault();
+            var secretary = _context.Secretaries.Where( e => e.UsersUsername.Equals(identityUser.UserName)).FirstOrDefault();
 
             SecretaryDashboardData secretaryDashboardData = new SecretaryDashboardData();
 

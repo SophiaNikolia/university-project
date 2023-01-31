@@ -293,7 +293,7 @@ namespace university_project.Controllers
                 model.Secretary.UsersUsername = model.User.Username;
 
                 // add the user to the Secretaties table
-                await _context.Secretaties.AddAsync(model.Secretary);
+                await _context.Secretaries.AddAsync(model.Secretary);
             }
 
             if(model.User.Role.Equals("Student"))
