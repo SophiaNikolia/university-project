@@ -38,13 +38,18 @@ namespace university_project.Controllers
             if (ModelState.IsValid)
             {
                 // find user by email
-                var usr = await _signInManager.UserManager.FindByEmailAsync(login.Email);
+                var usrByEmail = await _signInManager.UserManager.FindByEmailAsync(login.Email);
 
-                if (usr == null)
+                // find user by username
+                var usrByUsername = await _signInManager.UserManager.FindByNameAsync(login.Email);
+
+                if (usrByEmail == null && usrByUsername == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Email not found");
+                    ModelState.AddModelError(string.Empty, "Username or Email not found");
                     return View();
                 }
+
+                var usr = (usrByEmail != null) ? usrByEmail : usrByUsername;
 
                 if (await _signInManager.UserManager.IsInRoleAsync(usr, "Admin"))
                 {
