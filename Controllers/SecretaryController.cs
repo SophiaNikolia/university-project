@@ -250,6 +250,14 @@ namespace university_project.Controllers
 
         public async Task<Boolean> AddUserAsync(NewUser model, string role)
         {
+            var usrExists = await _context.Users.FindAsync(model.User.Username);
+            
+            if(usrExists != null)
+            {
+                ModelState.AddModelError(string.Empty, "User already exists");
+                return false;
+            }
+
             EntityUser identityUser = this.CreateUser();
 
             string email = string.Empty;
