@@ -6,10 +6,10 @@ namespace university_project.Models
 {
     public partial class NewUser
     {
-        public User User { get; set; }
-        public Secretary Secretary { get; set; }
-        public Professor Professor{ get; set; }
-        public Student Student { get; set; }
+        public User? User { get; set; }
+        public Secretary? Secretary { get; set; }
+        public Professor? Professor{ get; set; }
+        public Student? Student { get; set; }
 
         public List<SelectListItem> SelectRole { get; private set; } = new List<SelectListItem>
         {
